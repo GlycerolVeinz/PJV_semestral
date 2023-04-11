@@ -1,8 +1,19 @@
 ```mermaid
 classDiagram
+	class explenation
+	explenation : #private type
+	explenation: public type
+	explenation : method()
+	explenation <|-- explenation_inheritance : is instance 
+	explenation -- explenation_link : is a
+	explenation : explenation_type type
+	explenation .. explenation_type 
 
     class Simulation
-    Simulation : display_map()
+	Simulation : int Entity_count
+    Simulation : close_simulation()
+	Simulation : run_simulation()
+	Simulation : add_entity(Entity name)
 
     Simulation <-- Maps
     Simulation <-- Entity
@@ -15,11 +26,12 @@ classDiagram
 			Tiles : char look
 			Tiles : String name
 
-			Tiles <-- wall : is instance
-			Tiles <-- floor : is instance
-			Tiles <-- water : is instance
-			Tiles <-- bridge : is instance
-			Tiles <-- door : is instance
+			Tiles <|-- wall
+			Tiles <|-- floor
+			Tiles <|-- water
+			Tiles <|-- bridge
+			Tiles <|-- door
+			Tiles <|-- gold
 
 				wall : look "#"
 				wall : walkthru false
@@ -31,28 +43,54 @@ classDiagram
 				water : walkthru false
 
 				bridge : look "="
-				bridge : walkthru true
+				bridge : walkthru false
 
-				door : walkthru false
 				door : look "/"
+				door : walkthru false
 
-		Entity --> Inventory : has a
-		Entity : Inventory inventory
+				gold : look "."
+				gold : walkthru true
+				gold : int amount
+
 		Entity : int HP
 		Entity : int max_HP
+		Entity : char look
+		Entity : pathing()
 
-		Entity <-- Humanoid
-		Entity <-- Animal
-		Entity <-- Spirit
+		Entity -- Humanoid
+		Entity -- Animal
+		Entity -- Spirit
 
-			Inventory .. Items
-			Inventory : Items[ ] items
+			Humanoid <|-- Goblin
+			Humanoid <|-- Zombie
+			Humanoid <|-- Skeleton
+			Humanoid <|-- Human
+			Humanoid : #open_door()
 
-				Items : String name
-				Items : UUID id
+				Human <--> Zombie
+				Human : #turn_to_zombie()
+				Human : look "H"
 
-				Items <-- WearableItems : is a
-				Items <-- InhandItems : is a
-				Items <-- SmallItems : is a
+				Goblin : #horde_gold()
+				Goblin: look "G"
 
+				Zombie <--> Skeleton
+				Zombie : #decay()
+				Zombie : look "Z"
+
+				Skeleton : #kill_living()
+				Skeleton : look "S"
+
+			Animal <|-- Wolf
+			Animal : int hunger
+			Animal : #eat()
+
+				Wolf <--> Enigma
+				Wolf : #release_spirit()
+				Wolf : look "W"
+
+			Spirit <|-- Enigma
+			Spirit : #flying()
+
+				Enigma : look "E"
 ```
