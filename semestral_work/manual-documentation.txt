@@ -1,29 +1,18 @@
-DUNGEON SIMULATOR
+Goblin OverFlow
 
-User should be given an option in terminal, if he wants to start simulation or leave.
-    The option to leave should be always present throughout the simulation.
+When turned on in console question will appear: "Launch Goblin OverFlow? [y/n]"
 
-When the simulation starts, pre-generated empty map should appear. User is granted permission to add entities as he wills, and also start or stop simulation.
-Entity spawns should be purely random
+If launched user is greated by window where there are these elements:
 
-Each type of entity interacts differently with the surrounding
-    -Every Humanoid is able to walkthru doors and walk on bridges
-        
-        -Zombies should decay to Skeletons after some time
+- Dungeon map
+- Buttons
+    - add entity
+    - save / load
+    - start / pause
 
-        -Skeletons should kill any living if they come close to each other
-        
-        -Humans should become Zombies, if they come close to one 
-        -Humans collect gold, but do not drop it on death
+save / load buttons make pop-ups with possibility to change saving / loading file (directory)
 
-        -Goblins should collect gold and horde it on one big pile as a collective
-        -Goblins multiply should they come close to each other
-
-    -Any animal should be "affraid" of bridges, thus not walking on them
-        
-        -Wolves can eat Humans or Goblins if they come close to each other
-        -Wolves become enigmas should they die
-
-    -Any spirit should be indifferent to surrounding Tiles, only exception being walls
-
-        -Enigmas "seek revenge" and kill any Skeleton should they come close to eachother
+Goal of the game is to get rid of all the Goblins in the Dungeon, by adding entities.
+(number of entities is limited)
+(entities have hard time living with each other)
+(goblins multiply faast)

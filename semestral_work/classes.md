@@ -4,34 +4,44 @@ classDiagram
 	explenation : #private type
 	explenation: public type
 	explenation : method()
-	explenation <|-- explenation_inheritance : is instance 
-	explenation -- explenation_link : is a
-	explenation : explenation_type type
-	explenation .. explenation_type 
+	explenation <-- explenation_inheritance : is a 
+	explenation <|.. explenation_has_a : has a
 
     class Simulation
-	Simulation : int Entity_count
+	Simulation : int EntityCount
+	Simulation : int maxEntityCount
     Simulation : close_simulation()
 	Simulation : run_simulation()
-	Simulation : add_entity(Entity name)
+	Simulation : run_simulation()
+	Simulation : save_game()
+	Simulation : load_game()
+	Simulation : Maps maps
+	Simulation : Logic logic
 
-    Simulation <-- Maps
-    Simulation <-- Entity
+    Simulation <|..|> Maps
+	Simulation <|..|> Logic
+    Simulation <|..|> Entity
 
-		Maps .. Tiles
+		Logic : int currentTime
+		Logic : tick_timer()
+		Logic : Simulation sim
+		Logic : add_Entity(Entity name)
+
+		Maps ..|> Tiles
 		Maps : int Size
+		Maps : generate_map()???
 		Maps : Tiles[ ][ ] map
 
 			Tiles : Bool walkthru
 			Tiles : char look
 			Tiles : String name
 
-			Tiles <|-- wall
-			Tiles <|-- floor
-			Tiles <|-- water
-			Tiles <|-- bridge
-			Tiles <|-- door
-			Tiles <|-- gold
+			Tiles <-- wall
+			Tiles <-- floor
+			Tiles <-- water
+			Tiles <-- bridge
+			Tiles <-- door
+			Tiles <-- gold
 
 				wall : look "#"
 				wall : walkthru false
@@ -53,43 +63,45 @@ classDiagram
 				gold : int amount
 
 		Entity : int HP
-		Entity : int max_HP
+		Entity : int maxHP
 		Entity : char look
+		Entity : bool living
 		Entity : pathing()
 
-		Entity -- Humanoid
-		Entity -- Animal
-		Entity -- Spirit
+		Entity <-- Humanoid
+		Entity <-- Animal
+		Entity <-- Spirit
 
-			Humanoid <|-- Goblin
-			Humanoid <|-- Zombie
-			Humanoid <|-- Skeleton
-			Humanoid <|-- Human
+			Humanoid <-- Goblin
+			Humanoid <-- Zombie
+			Humanoid <-- Skeleton
+			Humanoid <-- Human
 			Humanoid : #open_door()
 
-				Human <--> Zombie
+				Human .. Zombie : turn_to_zombie()
 				Human : #turn_to_zombie()
 				Human : look "H"
 
 				Goblin : #horde_gold()
 				Goblin: look "G"
 
-				Zombie <--> Skeleton
+				Zombie .. Skeleton : decay()
 				Zombie : #decay()
 				Zombie : look "Z"
 
 				Skeleton : #kill_living()
+				Skeleton : #turn_to_ruble()
 				Skeleton : look "S"
 
-			Animal <|-- Wolf
+			Animal <-- Wolf
 			Animal : int hunger
 			Animal : #eat()
 
-				Wolf <--> Enigma
+				Wolf .. Enigma : release_spirit
 				Wolf : #release_spirit()
 				Wolf : look "W"
 
-			Spirit <|-- Enigma
+			Spirit <-- Enigma
 			Spirit : #flying()
 
 				Enigma : look "E"
