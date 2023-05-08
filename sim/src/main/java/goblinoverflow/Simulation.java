@@ -1,41 +1,40 @@
 package goblinoverflow;
 
-import goblinoverflow.logic.Logic;
-import goblinoverflow.maps.Maps;
+public class Simulation implements Runnable{
+    private String name;
 
-/**
- * Simulation
- */
-public class Simulation {
-    private int EntityCount;
-    private int maxEntityCount;
-    private Maps maps;
-    private Logic logic;
+    private boolean isRunning;
+    private int framesPerSecond = 60;
+    private int timePerLoop = 1000000000 / framesPerSecond;
 
-    public Simulation(int maxEntityCount) {
-        this.EntityCount = 0;
-        this.maxEntityCount = maxEntityCount;
-        this.maps = new Maps(50);
-        this.logic = new Logic(this);
+
+    public Simulation(String name) {
+        this.name = name;
+        this.isRunning = false;
     }
 
-    public void close_simulation() {
-        // close simulation logic
-    }
 
-    public void run_simulation() {
-        // run simulation logic
-    }
+    @Override
+    public void run() {
+        isRunning = true;
 
-    public void save_game() {
-        // save game logic
-    }
+        while (isRunning) {
+            long start = System.nanoTime();
 
-    public void load_game() {
-        // load game logic
-    }
+            // Update
 
-    public Maps getMaps() {
-        return maps;
+            // Render
+
+            long end = System.nanoTime();
+            long elapsed = end - start;
+
+            if (elapsed < timePerLoop) {
+                try {
+                    Thread.sleep((timePerLoop - elapsed) / 1000000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

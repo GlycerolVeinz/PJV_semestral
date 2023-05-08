@@ -1,13 +1,15 @@
 package goblinoverflow;
 
+import goblinoverflow.gui.Interface;
+
 /**
- * Hello world!
+ *
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Interface gui = new Interface("Goblin Overflow");
     }
 }
