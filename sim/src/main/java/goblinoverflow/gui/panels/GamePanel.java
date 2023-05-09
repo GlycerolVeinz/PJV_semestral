@@ -20,4 +20,14 @@ public class GamePanel extends JPanel{
         this.setBackground(Color.BLACK);
     }
 
+    @Override
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(10,10, this.tileSize, this.tileSize);
+        g2d.dispose();
+    }
 }

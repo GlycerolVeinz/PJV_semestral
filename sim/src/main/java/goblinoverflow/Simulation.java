@@ -1,40 +1,52 @@
 package goblinoverflow;
 
-public class Simulation implements Runnable{
-    private String name;
+import goblinoverflow.gui.Interface;
 
-    private boolean isRunning;
-    private int framesPerSecond = 60;
-    private int timePerLoop = 1000000000 / framesPerSecond;
-
-
-    public Simulation(String name) {
-        this.name = name;
-        this.isRunning = false;
-    }
+public class Simulation implements Runnable {
+	final String name;
+	final int framesPerSecond = 60;
+	final int timePerLoop = 1000000000 / framesPerSecond;
+	private final Interface gui;
+	private boolean isRunning;
 
 
-    @Override
-    public void run() {
-        isRunning = true;
+	public Simulation(String name) {
+		this.name = name;
+		this.isRunning = false;
+		this.gui = new Interface(name);
+	}
 
-        while (isRunning) {
-            long start = System.nanoTime();
+	public Interface getGui() {return gui;}
 
-            // Update
+	@Override
+	public void run() {
+		isRunning = true;
 
-            // Render
+		while (isRunning) {
+			long start = System.nanoTime();
 
-            long end = System.nanoTime();
-            long elapsed = end - start;
+			update();
 
-            if (elapsed < timePerLoop) {
-                try {
-                    Thread.sleep((timePerLoop - elapsed) / 1000000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+			redraw();
+
+			long end = System.nanoTime();
+			long elapsed = end - start;
+
+			if (elapsed < timePerLoop) {
+				try {
+					Thread.sleep((timePerLoop - elapsed) / 1000000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private void update() {
+//	TODO implement update
+	}
+
+	private void redraw(){
+		gui.repaint();
+	}
 }

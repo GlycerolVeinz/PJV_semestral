@@ -8,6 +8,12 @@ import java.awt.*;
 
 public class Interface extends JFrame
 {
+    private GamePanel gamePanel;
+    private BottomButtonPanel bottomButtonPanel;
+    private SideButtonPanel sideButtonPanel;
+    private SideStatsPanel SideStatsPanel;
+
+    final Color sidePanelsColor = Color.DARK_GRAY;
 
     public Interface(String title)
     {
@@ -15,15 +21,17 @@ public class Interface extends JFrame
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
 
-        GamePanel gamePanel = new GamePanel();
+        this.gamePanel = new GamePanel();
         window.add(gamePanel, BorderLayout.CENTER);
 
-        BottomButtonPanel bottomButtonPanel = new BottomButtonPanel();
+        this.bottomButtonPanel = new BottomButtonPanel(sidePanelsColor);
         window.add(bottomButtonPanel, BorderLayout.SOUTH);
 
-        SideButtonPanel sideButtonPanel = new SideButtonPanel();
+        this.sideButtonPanel = new SideButtonPanel(sidePanelsColor);
         window.add(sideButtonPanel, BorderLayout.EAST);
 
+        this.SideStatsPanel = new SideStatsPanel(sidePanelsColor);
+        window.add(SideStatsPanel, BorderLayout.WEST);
         window.pack();
 
         window.setLocationRelativeTo(null);
