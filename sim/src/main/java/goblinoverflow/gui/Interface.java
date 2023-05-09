@@ -8,10 +8,10 @@ import java.awt.*;
 
 public class Interface extends JFrame
 {
-    private GamePanel gamePanel;
-    private BottomButtonPanel bottomButtonPanel;
-    private SideButtonPanel sideButtonPanel;
-    private SideStatsPanel SideStatsPanel;
+    private final GamePanel gamePanel;
+    private final BottomButtonPanel bottomButtonPanel;
+    private final SideButtonPanel sideButtonPanel;
+    private final SideStatsPanel SideStatsPanel;
 
     final Color sidePanelsColor = Color.DARK_GRAY;
 

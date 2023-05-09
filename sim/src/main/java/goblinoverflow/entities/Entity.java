@@ -3,13 +3,14 @@ package goblinoverflow.entities;
 import goblinoverflow.gui.panels.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Entity
 {
     private int x;
     private int y;
 
-    private String name;
+    private final String name;
     private static GamePanel gamePanel;
 
     public Entity(String name, int x, int y) {
@@ -18,7 +19,7 @@ public class Entity
         this.y = y;
     }
 
-    public void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d, BufferedImage image) {
 //        TODO: draw entity
     }
 
@@ -46,8 +47,5 @@ public class Entity
         return y;
     }
 
-    public void moveBy(int dx, int dy) {
-        setX(getX() + dx);
-        setY(getY() + dy);
-    }
+
 }

@@ -1,17 +1,22 @@
 package goblinoverflow.gui.panels;
 
+import goblinoverflow.entities.Entity;
+
 import javax.swing.JPanel;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel{
 
-    private final int tileSize = 16;
+    private static final int tileSize = 16;
 
-    private final int mapTileWidth = 32;
-    private final int mapTileHeight = 24;
+    private static final int mapTileWidth = 32;
+    private static final int mapTileHeight = 24;
 
     final int panelWidth = mapTileWidth * tileSize;
     final int panelHeight = mapTileHeight * tileSize;
+
+    private ArrayList<Entity> entities = new ArrayList<>();
 
     public GamePanel()
     {
@@ -19,15 +24,15 @@ public class GamePanel extends JPanel{
         this.setBackground(Color.BLACK);
     }
 
-    public int getTileSize() {
+    public static int getTileSize() {
         return tileSize;
     }
 
-    public int getMapTileWidth() {
+    public static int getMapTileWidth() {
         return mapTileWidth;
     }
 
-    public int getMapTileHeight() {
+    public static int getMapTileHeight() {
         return mapTileHeight;
     }
 
