@@ -1,6 +1,8 @@
 package goblinoverflow.entities;
 
-import java.awt.Color;
+import goblinoverflow.gui.panels.GamePanel;
+
+import java.awt.*;
 
 public class Entity
 {
@@ -8,15 +10,20 @@ public class Entity
     private int y;
 
     private String name;
-    private char glyph;
-    private Color color;
+    private static GamePanel gamePanel;
 
-    public Entity(String name, int x, int y, char glyph, Color color) {
+    public Entity(String name, int x, int y) {
         this.name = name;
         this.x = x;
         this.y = y;
-        this.glyph = glyph;
-        this.color = color;
+    }
+
+    public void draw(Graphics2D g2d) {
+//        TODO: draw entity
+    }
+
+    public void update() {
+//        TODO: update entity
     }
 
     public void setX(int x) {
@@ -39,11 +46,8 @@ public class Entity
         return y;
     }
 
-    public char getGlyph() {
-        return glyph;
-    }
-
-    public Color getColor() {
-        return color;
+    public void moveBy(int dx, int dy) {
+        setX(getX() + dx);
+        setY(getY() + dy);
     }
 }

@@ -10,8 +10,5 @@ public class Creature extends Entity
         super(name, x, y, glyph, color);
     }
 
-    public void moveBy(int dx, int dy) {
-        setX(getX() + dx);
-        setY(getY() + dy);
-    }
+
 }
