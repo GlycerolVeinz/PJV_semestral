@@ -27,7 +27,7 @@ public class GamePanel extends JPanel{
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(Color.WHITE);
-        g2d.fillRect(10,10, this.tileSize, this.tileSize);
+        g2d.fillRect(16,16, this.tileSize, this.tileSize);
         g2d.dispose();
     }
 }
