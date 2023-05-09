@@ -7,13 +7,16 @@ public class GamePanel extends JPanel{
 
     final int tileSize = 16;
 
-    final int mapTileWidth = 60;
-    final int mapTileHeight = 45;
-    final int mapWidth = mapTileWidth * tileSize;
-    final int mapHeight = mapTileHeight * tileSize;
+    final int mapTileWidth = 32;
+    final int mapTileHeight = 24;
 
-    public GamePanel(){
-        this.setPreferredSize(new Dimension(mapWidth, mapHeight));
+    final int panelWidth = mapTileWidth * tileSize;
+    final int panelHeight = mapTileHeight * tileSize;
+
+
+    public GamePanel()
+    {
+        this.setPreferredSize(new Dimension(panelWidth, panelHeight));
         this.setBackground(Color.BLACK);
     }
 
