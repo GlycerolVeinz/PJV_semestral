@@ -10,6 +10,10 @@ public class Creature extends Entity {
 		super(name, x, y);
 	}
 
+	public void update() {
+//        TODO: update entity
+	}
+
 	public void moveBy(int dx, int dy) {
 		setX(getX() + (dx * GamePanel.getTileSize()));
 		setY(getY() + (dy * GamePanel.getTileSize()));

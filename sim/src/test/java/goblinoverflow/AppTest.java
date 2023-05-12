@@ -1,11 +1,16 @@
 package goblinoverflow;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import goblinoverflow.entities.tiles.Tile;
 import org.junit.Test;
 
+
+import java.io.IOException;
+
 /**
- * Unit test for simple App.
+ * Unit test for goblin overflow.
  */
 public class AppTest 
 {
@@ -16,5 +21,27 @@ public class AppTest
     public void shouldAnswerWithTrue()
     {
         assertTrue( true );
+    }
+
+    @Test
+    public void testGetTileImage() {
+        boolean existingTileLoad = false;
+        try {
+            Tile tile = new Tile("wall", 0, 0);
+        } catch (IOException e) {
+            existingTileLoad = true;
+        }
+        assertFalse(existingTileLoad);
+    }
+
+    @Test
+    public void testGetNonExistingTileImage() {
+        boolean nonExistingTileLoad = false;
+        try {
+            Tile tile = new Tile("nonExistingTile", 0, 0);
+        } catch (Exception e) {
+            nonExistingTileLoad = true;
+        }
+        assertTrue(nonExistingTileLoad);
     }
 }

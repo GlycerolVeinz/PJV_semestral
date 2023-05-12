@@ -32,6 +32,7 @@ public class Simulation implements Runnable {
 			long end = System.nanoTime();
 			long elapsed = end - start;
 
+			// manages fps vsync
 			if (elapsed < timePerLoop) {
 				try {
 					Thread.sleep((timePerLoop - elapsed) / 1000000);
