@@ -10,6 +10,7 @@ public class Simulation implements Runnable {
 	private boolean isRunning;
 
 
+
 	public Simulation(String name) {
 		this.name = name;
 		this.isRunning = false;

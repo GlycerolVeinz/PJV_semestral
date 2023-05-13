@@ -3,6 +3,7 @@ package goblinoverflow;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.entities.tiles.Tile;
 import org.junit.Test;
 
@@ -43,5 +44,16 @@ public class AppTest
             nonExistingTileLoad = true;
         }
         assertTrue(nonExistingTileLoad);
+    }
+
+    @Test
+    public void testMapLoad() {
+        boolean mapLoad = false;
+        try {
+            Map map = new Map();
+        } catch (Exception e) {
+            mapLoad = true;
+        }
+        assertFalse(mapLoad);
     }
 }

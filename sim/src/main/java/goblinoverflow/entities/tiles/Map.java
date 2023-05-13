@@ -18,9 +18,9 @@ public class Map {
 					char glyph = line.charAt(x);
 					String tileName = "";
 					if (glyph == '#'){
-						tiles[x][y] = new Tile("wall", x, y);
+						tiles[y][x] = new Tile("wall", x, y);
 					} else if (glyph == '.') {
-						tiles[x][y] = new Tile("floor", x, y);
+						tiles[y][x] = new Tile("floor", x, y);
 					}
 				}
 			}
