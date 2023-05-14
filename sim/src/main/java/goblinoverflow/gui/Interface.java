@@ -1,5 +1,6 @@
 package goblinoverflow.gui;
 
+import goblinoverflow.Simulation;
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.gui.panels.*;
 
@@ -16,7 +17,7 @@ public class Interface extends JFrame
 
     final Color sidePanelsColor = Color.DARK_GRAY;
 
-    public Interface(String title, Map gameMap)
+    public Interface(String title, Map gameMap, Simulation sim)
     {
         JFrame window = new JFrame(title);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +29,7 @@ public class Interface extends JFrame
         this.bottomButtonPanel = new BottomButtonPanel(sidePanelsColor);
         window.add(bottomButtonPanel, BorderLayout.SOUTH);
 
-        this.sideButtonPanel = new SideButtonPanel(sidePanelsColor);
+        this.sideButtonPanel = new SideButtonPanel(sidePanelsColor, sim);
         window.add(sideButtonPanel, BorderLayout.EAST);
 
         this.SideStatsPanel = new SideStatsPanel(sidePanelsColor);
