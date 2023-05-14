@@ -19,8 +19,7 @@ public class AppTest
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
-    {
+    public void shouldAnswerWithTrue() {
         assertTrue( true );
     }
 
@@ -50,7 +49,7 @@ public class AppTest
     public void testMapLoad() {
         boolean mapLoad = false;
         try {
-            Map map = new Map();
+            Map map = new Map(24,32);
         } catch (Exception e) {
             mapLoad = true;
         }

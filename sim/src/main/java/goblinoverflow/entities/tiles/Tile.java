@@ -10,7 +10,7 @@ import java.util.Objects;
 import static java.lang.System.exit;
 
 public class Tile extends Entity {
-	private BufferedImage image;
+	private BufferedImage texture;
 
 	public Tile(String name, int x, int y) throws IOException{
 		super(name, x, y);
@@ -21,7 +21,7 @@ public class Tile extends Entity {
 		BufferedImage image;
 		try {
 			image = ImageIO.read(Objects.requireNonNull(getClass().getResource("/map/tiles/" + name + ".png")));
-			setImage(image);
+			setTexture(image);
 		} catch (IOException e) {
 			System.err.println("Error loading tile image");
 			e.printStackTrace();
@@ -29,7 +29,11 @@ public class Tile extends Entity {
 		}
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setTexture(BufferedImage image) {
+		this.texture = image;
+	}
+
+	public BufferedImage getTexture() {
+		return texture;
 	}
 }

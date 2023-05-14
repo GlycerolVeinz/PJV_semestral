@@ -5,29 +5,36 @@ import java.io.FileReader;
 import java.util.Objects;
 
 public class Map {
-	private Tile[][] tiles;
+	private final Tile[][] tiles;
 
-	public Map(){
-		tiles = new Tile[24][32];
+	public Map(int Height, int Width) {
+		tiles = new Tile[Height][Width];
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(Objects.requireNonNull(getClass().getResource("/map/dungeon_map.txt")).getFile()));
-			for (int y = 0; y < 24; y++) {
+			for (int y = 0; y < Height; ++y) {
 				String line = reader.readLine();
-				for (int x = 0; x < 32; x++) {
+				for (int x = 0; x < Width; ++x) {
 					char glyph = line.charAt(x);
 					String tileName = "";
-					if (glyph == '#'){
+					if (glyph == '#') {
 						tiles[y][x] = new Tile("wall", x, y);
 					} else if (glyph == '.') {
 						tiles[y][x] = new Tile("floor", x, y);
+					} else if (glyph == '/') {
+						tiles[y][x] = new Tile("door", x, y);
 					}
 				}
 			}
+			reader.close();
 		} catch (Exception e) {
 			System.err.println("Error loading map file");
 			e.printStackTrace();
 			System.exit(101);
 		}
+	}
+
+	public Tile getTile(int x, int y) {
+		return tiles[y][x];
 	}
 }

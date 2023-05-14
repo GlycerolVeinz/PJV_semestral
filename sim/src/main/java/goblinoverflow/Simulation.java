@@ -1,5 +1,6 @@
 package goblinoverflow;
 
+import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.gui.Interface;
 
 public class Simulation implements Runnable {
@@ -9,12 +10,14 @@ public class Simulation implements Runnable {
 	private final Interface gui;
 	private boolean isRunning;
 
-
+	private final static int mapTileWidth = 32;
+	private final static int mapTileHeight = 24;
+	private final static Map gameMap = new Map(getMapTileHeight(), getMapTileWidth());
 
 	public Simulation(String name) {
 		this.name = name;
 		this.isRunning = false;
-		this.gui = new Interface(name);
+		this.gui = new Interface(name, gameMap);
 	}
 
 	public Interface getGui() {return gui;}
@@ -50,5 +53,13 @@ public class Simulation implements Runnable {
 
 	private void redraw(){
 		gui.repaint();
+	}
+
+	public static int getMapTileWidth() {
+		return mapTileWidth;
+	}
+
+	public static int getMapTileHeight() {
+		return mapTileHeight;
 	}
 }
