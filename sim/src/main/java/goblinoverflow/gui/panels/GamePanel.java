@@ -1,12 +1,14 @@
 package goblinoverflow.gui.panels;
 
 import goblinoverflow.Simulation;
-import goblinoverflow.entities.Entity;
+import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
 
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class GamePanel extends JPanel{
 
@@ -17,10 +19,8 @@ public class GamePanel extends JPanel{
 
     final int panelWidth = mapTileWidth * tileSize;
     final int panelHeight = mapTileHeight * tileSize;
-
-    private ArrayList<Entity> entities = new ArrayList<>();
-
     private final Map gameMap;
+
 
     public GamePanel(Map gameMap)
     {
@@ -32,7 +32,10 @@ public class GamePanel extends JPanel{
     private void drawMap(Graphics2D g2d) {
         for (int y = 0; y < getMapTileHeight(); ++y) {
             for (int x = 0; x < getMapTileWidth(); ++x) {
-                g2d.drawImage(gameMap.getTile(x, y).getTexture(), x * getTileSize(), y * getTileSize(), null);
+                if (!Objects.equals(gameMap.getTile(x, y).getName(), "floor"))
+                {
+                    g2d.drawImage(gameMap.getTile(x, y).getTexture(), x * getTileSize(), y * getTileSize(), null);
+                }
             }
         }
     }
@@ -54,8 +57,15 @@ public class GamePanel extends JPanel{
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+
         drawMap(g2d);
 
+        ArrayList<Creature> creatures = Simulation.getCreatures();
+        if (creatures.size() > 0) {
+            for (Creature creat : creatures) {
+                g2d.drawImage(creat.getTexture(), creat.getX() * getTileSize(), creat.getY() * getTileSize(), null);
+            }
+        }
 
         g2d.dispose();
     }

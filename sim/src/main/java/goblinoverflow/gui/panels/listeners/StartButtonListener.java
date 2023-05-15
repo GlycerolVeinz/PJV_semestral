@@ -1,4 +1,4 @@
-package goblinoverflow.gui.panels.buttons.listeners;
+package goblinoverflow.gui.panels.listeners;
 
 import goblinoverflow.Simulation;
 import goblinoverflow.gui.panels.buttons.StartButton;

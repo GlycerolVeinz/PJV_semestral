@@ -11,16 +11,21 @@ public class BottomButtonPanel extends JPanel
     final int buttonsCount = 4;
     private ArrayList<EntityButton> buttons = new ArrayList<>();
 
-    public BottomButtonPanel(Color color)
+    public BottomButtonPanel(Color color, GamePanel gamePanel)
     {
         this.setLayout(new GridLayout(1, buttonsCount));
         this.setPreferredSize(new Dimension(100, 50));
         this.setBackground(color);
 
-        EntityButton humanButton = new EntityButton("add Human", this);
-        EntityButton zombieButton = new EntityButton("add Zombie", this);
-        EntityButton skellyButton = new EntityButton("add Skelly", this);
-        EntityButton wolfButton = new EntityButton("add Wolf", this);
+        EntityButton humanButton = new EntityButton("add Human", this, gamePanel);
+        EntityButton zombieButton = new EntityButton("add Zombie", this, gamePanel);
+        EntityButton skellyButton = new EntityButton("add Skelly", this, gamePanel);
+        EntityButton wolfButton = new EntityButton("add Wolf", this, gamePanel);
+
+        humanButton.setName("human");
+        zombieButton.setName("zombie");
+        skellyButton.setName("skeleton");
+        wolfButton.setName("wolf");
 
         buttons.add(humanButton);
         buttons.add(zombieButton);

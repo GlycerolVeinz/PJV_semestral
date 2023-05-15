@@ -1,7 +1,7 @@
 package goblinoverflow.gui.panels.buttons;
 
 import goblinoverflow.Simulation;
-import goblinoverflow.gui.panels.buttons.listeners.StartButtonListener;
+import goblinoverflow.gui.panels.listeners.StartButtonListener;
 
 import javax.swing.*;
 import java.awt.*;

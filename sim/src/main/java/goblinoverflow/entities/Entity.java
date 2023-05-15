@@ -43,7 +43,7 @@ public class Entity
                     break;
             }
 
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResource("/map/tiles/" + name + ".png")));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResource(source + name + ".png")));
             setTexture(image);
         } catch (IOException e) {
             System.err.println("Error loading tile image");
@@ -51,6 +51,7 @@ public class Entity
             exit(100);
         }
     }
+
 
     public void setX(int x) {
         this.x = x;

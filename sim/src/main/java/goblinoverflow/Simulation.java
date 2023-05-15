@@ -1,17 +1,26 @@
 package goblinoverflow;
 
+import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.gui.Interface;
 
+import java.util.ArrayList;
+
 public class Simulation implements Runnable {
+	final String name;
+	private boolean isRunning;
+	final int framesPerSecond = 60;
+	final int timePerLoop = 1000000000 / framesPerSecond;
 	private final static int mapTileWidth = 32;
 	private final static int mapTileHeight = 24;
 	private final static Map gameMap = new Map(getMapTileHeight(), getMapTileWidth());
-	final String name;
-	final int framesPerSecond = 60;
-	final int timePerLoop = 1000000000 / framesPerSecond;
+	private static ArrayList<Creature> creatures = new ArrayList<>();
+
+	public static ArrayList<Creature> getCreatures() {
+		return creatures;
+	}
+
 	private final Interface gui;
-	private boolean isRunning;
 
 	public Simulation(String name) {
 		this.name = name;
@@ -25,6 +34,11 @@ public class Simulation implements Runnable {
 	public static int getMapTileHeight() {
 		return mapTileHeight;
 	}
+
+	public static Map getGameMap() {
+		return gameMap;
+	}
+
 	public Interface getGui() {
 		return gui;
 	}
@@ -66,5 +80,6 @@ public class Simulation implements Runnable {
 
 	private void redraw() {
 		gui.repaint();
+		gui.getGamePanel().repaint();
 	}
 }

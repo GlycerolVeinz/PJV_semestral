@@ -26,7 +26,7 @@ public class Interface extends JFrame
         this.gamePanel = new GamePanel(gameMap);
         window.add(gamePanel, BorderLayout.CENTER);
 
-        this.bottomButtonPanel = new BottomButtonPanel(sidePanelsColor);
+        this.bottomButtonPanel = new BottomButtonPanel(sidePanelsColor, gamePanel);
         window.add(bottomButtonPanel, BorderLayout.SOUTH);
 
         this.sideButtonPanel = new SideButtonPanel(sidePanelsColor, sim);
@@ -38,5 +38,9 @@ public class Interface extends JFrame
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 }
