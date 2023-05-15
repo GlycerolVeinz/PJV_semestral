@@ -17,6 +17,7 @@ public class StartButtonListener implements ActionListener {
 	public Simulation getSimulation() {
 		return simulation;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		StartButton button = (StartButton) e.getSource();
