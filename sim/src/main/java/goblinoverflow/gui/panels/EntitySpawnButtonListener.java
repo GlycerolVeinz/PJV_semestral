@@ -45,7 +45,7 @@ public class EntitySpawnButtonListener implements ActionListener {
 				}
 			}
 			String currentCreature = button.getName();
-			EntitySpawnMouseListener listener = new EntitySpawnMouseListener(currentCreature, getGamePanel());
+			EntitySpawnMouseListener listener = new EntitySpawnMouseListener(currentCreature);
 			getGamePanel().addMouseListener(listener);
 			button.setListener(listener);
 		}

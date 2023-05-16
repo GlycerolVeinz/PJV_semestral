@@ -38,7 +38,6 @@ public class Simulation implements Runnable {
 	public static Map getGameMap() {
 		return gameMap;
 	}
-
 	public Interface getGui() {
 		return gui;
 	}

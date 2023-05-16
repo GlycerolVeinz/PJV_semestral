@@ -8,12 +8,10 @@ import java.awt.event.MouseAdapter;
 
 public class EntitySpawnMouseListener extends MouseAdapter {
 	private String currentCreature;
-	private GamePanel gamePanel;
 
-	public EntitySpawnMouseListener(String currentCreature, GamePanel gamePanel) {
+	public EntitySpawnMouseListener(String currentCreature) {
 		super();
 		this.currentCreature = currentCreature;
-		this.gamePanel = gamePanel;
 	}
 
 	@Override
@@ -21,8 +19,25 @@ public class EntitySpawnMouseListener extends MouseAdapter {
 		int x = e.getX() / GamePanel.getTileSize();
 		int y = e.getY() / GamePanel.getTileSize();
 
-		Creature creature = new Creature(getCurrentCreature(), x, y);
-		Simulation.getCreatures().add(creature);
+		if (isTileEmpty(x, y)) {
+			Creature creature = new Creature(getCurrentCreature(), x, y);
+			Simulation.getCreatures().add(creature);
+		}
+	}
+
+	private boolean isTileEmpty(int x, int y) {
+		boolean isEmpty = true;
+		if (Simulation.getGameMap().getTile(x, y).getName().equals("floor")) {
+			for (Creature creature : Simulation.getCreatures()){
+				if (creature.getX() == x && creature.getY() == y) {
+					isEmpty = false;
+					break;
+				}
+			}
+		} else {
+			isEmpty = false;
+		}
+		return isEmpty;
 	}
 
 	public String getCurrentCreature() {
