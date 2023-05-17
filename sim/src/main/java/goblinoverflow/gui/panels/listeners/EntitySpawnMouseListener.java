@@ -20,8 +20,12 @@ public class EntitySpawnMouseListener extends MouseAdapter {
 		int y = e.getY() / GamePanel.getTileSize();
 
 		if (isTileEmpty(x, y)) {
-			Creature creature = new Creature(getCurrentCreature(), x, y);
-			Simulation.getCreatures().add(creature);
+			try {
+				Creature creature = new Creature(getCurrentCreature(), x, y);
+				Simulation.getCreatures().add(creature);
+			} catch (RuntimeException exception) {
+				System.err.println("Max entities reached");
+			}
 		}
 	}
 

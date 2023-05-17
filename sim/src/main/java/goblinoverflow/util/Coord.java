@@ -24,4 +24,8 @@ public class Coord {
 	public void setY(int y){
 		this.y = y;
 	}
+
+	public int distance(Coord coord) {
+		return Math.abs(coord.getX() - this.getX()) + Math.abs(coord.getY() - this.getY());
+	}
 }

@@ -11,22 +11,22 @@ import static java.lang.System.exit;
 public class Spawner {
 	public void updateMap() {
 		ArrayList<Coord> emptyTiles = Simulation.findEmptyTiles();
-//		addGold(emptyTiles);
-		addGoblins(emptyTiles);
+		addGold(emptyTiles);
 	}
 
-//	private void addGold(ArrayList<Coord> emptyTiles){
-//		for (int i = 0; i < 10; i++) {
-//			int randomIndex = (int) (Math.random() * emptyTiles.size());
-//			Coord randomCoord = emptyTiles.get(randomIndex);
-//
-//
-//			emptyTiles.remove(randomIndex);
-//		}
-//	}
+	private void addGold(ArrayList<Coord> emptyTiles){
+		for (int i = 0; i < 10; i++) {
+			int randomIndex = (int) (Math.random() * emptyTiles.size());
+			Coord randomCoord = emptyTiles.get(randomIndex);
 
-	private void addGoblins(ArrayList<Coord> emptyTiles) {
-		try {
+
+			emptyTiles.remove(randomIndex);
+		}
+	}
+
+
+	public void addGoblins(ArrayList<Coord> emptyTiles) {
+//	only for initial spawn of goblins
 			for (int i = 0; i < 5; i++) {
 				int randomIndex = (int) (Math.random() * emptyTiles.size());
 				Coord randomCoord = emptyTiles.get(randomIndex);
@@ -36,10 +36,5 @@ public class Spawner {
 
 				emptyTiles.remove(randomIndex);
 			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("DEFEAT");
-			System.out.println("GOBLINS HAVE OVERFLOWN YOUR DUNGEON");
-			exit(0);
-		}
 	}
 }
