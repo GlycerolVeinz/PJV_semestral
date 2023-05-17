@@ -3,6 +3,8 @@ package goblinoverflow;
 import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.gui.Interface;
+import goblinoverflow.logic.spawn.Spawner;
+import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
 
@@ -15,6 +17,7 @@ public class Simulation implements Runnable {
 	private final static int mapTileHeight = 24;
 	private final static Map gameMap = new Map(getMapTileHeight(), getMapTileWidth());
 	private static ArrayList<Creature> creatures = new ArrayList<>();
+	private final static Spawner spawner = new Spawner();
 
 	public static ArrayList<Creature> getCreatures() {
 		return creatures;
@@ -47,21 +50,46 @@ public class Simulation implements Runnable {
 	public void setRunning(boolean running) {
 		isRunning = running;
 	}
+	public static ArrayList<Coord> findEmptyTiles() {
+		ArrayList<Coord> emptyTiles = new ArrayList<>();
+		for (int x = 0; x < getMapTileWidth(); x++) {
+			for (int y = 0; y < getMapTileHeight(); y++) {
+				if (getGameMap().getTile(x, y).getName().equals("floor")) {
+					boolean isEmpty = true;
+					for (Creature creature : getCreatures()) {
+						if (creature.getX() == x && creature.getY() == y) {
+							isEmpty = false;
+							break;
+						}
+					}
+					if (isEmpty) {
+						emptyTiles.add(new Coord(x, y));
+					}
+				}
+			}
+		}
+
+		return emptyTiles;
+	}
+
 
 	@Override
 	public void run() {
+		int iteration = 0;
 		while (true) {
 			long start = System.nanoTime();
 
 			if (isRunning) {
-				update();
+				update(iteration);
 			}
 
 			redraw();
 
+
+			iteration = (iteration + 1) % 60;
+
 			long end = System.nanoTime();
 			long elapsed = end - start;
-
 			// manages fps vsync
 			if (elapsed < timePerLoop) {
 				try {
@@ -73,8 +101,10 @@ public class Simulation implements Runnable {
 		}
 	}
 
-	private void update() {
-//	TODO implement update
+	private void update(int iteration) {
+		if (iteration == 0){
+			spawner.updateMap();
+		}
 	}
 
 	private void redraw() {
