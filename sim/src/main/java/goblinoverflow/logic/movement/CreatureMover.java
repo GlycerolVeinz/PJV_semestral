@@ -5,6 +5,7 @@ import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CreatureMover {
 	public final static Coord up = new Coord(0, -1);
@@ -15,6 +16,7 @@ public class CreatureMover {
 	public final static Coord upRight = new Coord(+1, -1);
 	public final static Coord downLeft = new Coord(-1, +1);
 	public final static Coord downRight = new Coord(+1, +1);
+	public final static Coord[] directions = {up, down, left, right, upLeft, upRight, downLeft, downRight};
 
 	public void moveAllCreatures() {
 		ArrayList<Creature> goblins = new ArrayList<>();
@@ -32,7 +34,7 @@ public class CreatureMover {
 		}
 
 		setGoblinTargets(goblins, gold);
-		moveGoblins();
+		moveGoblins(goblins);
 
 		setCreatureTargets(otherCreatures, goblins);
 		moveCreatures();
@@ -67,8 +69,22 @@ public class CreatureMover {
 		}
 	}
 
-	public void moveGoblins() {
-
+	public void moveGoblins(ArrayList<Creature> goblins) {
+		for (Creature goblin : goblins){
+			boolean walked = false;
+			while (!walked)
+			{
+				Random random = new Random();
+				int randomIndex = random.nextInt(directions.length);
+				Coord randomDirection = directions[randomIndex];
+				if (!Simulation.getGameMap().getTile(goblin.getX() + randomDirection.getX(), goblin.getY() + randomDirection.getY()).getName().equals("wall"))
+				{
+					goblin.setX(goblin.getX() + randomDirection.getX());
+					goblin.setY(goblin.getY() + randomDirection.getY());
+					walked = true;
+				}
+			}
+		}
 	}
 
 	public void moveCreatures() {

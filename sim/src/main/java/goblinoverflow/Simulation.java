@@ -17,7 +17,7 @@ public class Simulation implements Runnable {
 	private final static CreatureMover creatureMover = new CreatureMover();
 	private static ArrayList<Creature> creatures = new ArrayList<>();
 	final String name;
-	final int framesPerSecond = 60;
+	final int framesPerSecond = 1;
 	final int timePerLoop = 1000000000 / framesPerSecond;
 	private final Interface gui;
 	private boolean isRunning;
@@ -81,6 +81,7 @@ public class Simulation implements Runnable {
 	public void run() {
 		int iteration = 0;
 		spawner.addGoblins(findEmptyTiles());
+		spawner.updateMap();
 		while (true) {
 			long start = System.nanoTime();
 

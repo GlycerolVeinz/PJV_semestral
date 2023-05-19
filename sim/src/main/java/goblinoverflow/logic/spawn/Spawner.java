@@ -19,7 +19,9 @@ public class Spawner {
 			int randomIndex = (int) (Math.random() * emptyTiles.size());
 			Coord randomCoord = emptyTiles.get(randomIndex);
 
-
+			Creature newGold = new Creature("gold", randomCoord.getX(), randomCoord.getY());
+			Simulation.getCreatures().add(newGold);
+			
 			emptyTiles.remove(randomIndex);
 		}
 	}
