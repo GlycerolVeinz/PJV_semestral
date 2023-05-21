@@ -18,16 +18,5 @@ public class SideButtonPanel extends JPanel {
 		StartButton startButton = new StartButton("Start", sim);
 		this.add(startButton);
 
-		ArrayList<JButton> buttons = new ArrayList<>();
-		JButton saveButton = new JButton("Save");
-		buttons.add(saveButton);
-		JButton loadButton = new JButton("Load");
-		buttons.add(loadButton);
-
-		for (JButton button : buttons) {
-			button.setBackground(Color.GRAY);
-			button.setForeground(Color.WHITE);
-			this.add(button);
-		}
 	}
 }

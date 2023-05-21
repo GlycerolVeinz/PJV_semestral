@@ -7,8 +7,11 @@ import goblinoverflow.util.Coord;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static java.lang.System.exit;
+
 public class Creature extends Entity {
-	private static final int maxEntities = 20;
+	private static final int maxEntities = 7;
+	private static final int maxGoblins = 15;
 	private static int goblinCount = 0;
 	private static int wolfCount = 0;
 	private static int humanCount = 0;
@@ -39,6 +42,10 @@ public class Creature extends Entity {
 				break;
 			case "goblin":
 				goblinCount++;
+				if (goblinCount > maxGoblins) {
+					System.out.println("GOBLIN OVERFLOW");
+					exit(0);
+				}
 				break;
 			default:
 				break;
@@ -60,4 +67,32 @@ public class Creature extends Entity {
 		setX(getX() + dx);
 		setY(getY() + dy);
 	}
+
+	public static void creatureDied(Creature creature){
+		switch (creature.getName()) {
+			case "wolf":
+				wolfCount--;
+				break;
+			case "human":
+				humanCount--;
+				break;
+			case "zombie":
+				zombieCount--;
+				break;
+			case "skeleton":
+				skeletonCount--;
+				break;
+			case "goblin":
+				goblinCount--;
+				break;
+			default:
+				break;
+		}
+		if (goblinCount == 0){
+			System.out.println("YOU WIN");
+			exit(0);
+		}
+		creatureCount = wolfCount + humanCount + zombieCount + skeletonCount;
+	}
+
 }
