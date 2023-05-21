@@ -1,7 +1,12 @@
 package goblinoverflow.entities.tiles;
 
+import goblinoverflow.Simulation;
+import goblinoverflow.logic.movement.CreatureMover;
+import goblinoverflow.util.Coord;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Map {
@@ -36,5 +41,19 @@ public class Map {
 
 	public Tile getTile(int x, int y) {
 		return tiles[y][x];
+	}
+
+	public ArrayList<Tile> getNeighbours(Tile tile) {
+		ArrayList<Tile> neighbours = new ArrayList<>();
+		int x = tile.getX();
+		int y = tile.getY();
+		for (Coord dir : CreatureMover.directions){
+			int newX = x + dir.getX();
+			int newY = y + dir.getY();
+			if (newX >= 0 && newX < Simulation.getMapTileWidth() && newY >= 0 && newY < Simulation.getMapTileHeight()){
+				neighbours.add(getTile(newX, newY));
+			}
+		}
+		return neighbours;
 	}
 }

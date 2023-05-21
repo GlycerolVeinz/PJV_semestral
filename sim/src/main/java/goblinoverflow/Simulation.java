@@ -15,7 +15,7 @@ public class Simulation implements Runnable {
 	private final static Map gameMap = new Map(getMapTileHeight(), getMapTileWidth());
 	private final static Spawner spawner = new Spawner();
 	private final static CreatureMover creatureMover = new CreatureMover();
-	private static ArrayList<Creature> creatures = new ArrayList<>();
+	private static final ArrayList<Creature> creatures = new ArrayList<>();
 	final String name;
 	final int framesPerSecond = 1;
 	final int timePerLoop = 1000000000 / framesPerSecond;
@@ -91,8 +91,7 @@ public class Simulation implements Runnable {
 
 			redraw();
 
-
-			iteration = (iteration + 1) % 600; //every 10 seconds
+			iteration = (iteration + 1) % (framesPerSecond * 10);
 
 			long end = System.nanoTime();
 			long elapsed = end - start;
