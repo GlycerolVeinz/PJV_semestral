@@ -47,9 +47,7 @@ public class Creature extends Entity {
 		getEntityTexture(name, 'c');
 	}
 
-	public Coord getCoord() {
-		return new Coord(getX(), getY());
-	}
+
 	public Creature getCurrentTarget() {
 		return currentTarget;
 	}
@@ -58,27 +56,8 @@ public class Creature extends Entity {
 		this.currentTarget = currentTarget;
 	}
 
-	public void update() {
-//        TODO: update entity
-	}
-
 	public void moveBy(int dx, int dy) {
 		setX(getX() + dx);
 		setY(getY() + dy);
 	}
-
-
-	//public void moveTowards(int targetX, int targetY) {
-	//	int dx = targetX - getX();
-	//	int dy = targetY - getY();
-	//
-	//	int stepX = dx > 0 ? 1 : -1;
-	//	int stepY = dy > 0 ? 1 : -1;
-	//
-	//	if (Math.abs(dx) > Math.abs(dy)) {
-	//		moveBy(stepX, 0);
-	//	} else {
-	//		moveBy(0, stepY);
-	//	}
-	//}
 }

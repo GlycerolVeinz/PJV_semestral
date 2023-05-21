@@ -1,6 +1,7 @@
 package goblinoverflow.entities.tiles;
 
 import goblinoverflow.Simulation;
+import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.logic.movement.CreatureMover;
 import goblinoverflow.util.Coord;
 
@@ -55,5 +56,9 @@ public class Map {
 			}
 		}
 		return neighbours;
+	}
+
+	public Tile creatureLocation(Creature creature) {
+		return tiles[creature.getY()][creature.getX()];
 	}
 }

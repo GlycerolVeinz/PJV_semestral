@@ -2,10 +2,11 @@ package goblinoverflow.logic.movement;
 
 import goblinoverflow.Simulation;
 import goblinoverflow.entities.creatures.Creature;
+import goblinoverflow.entities.tiles.Tile;
+import goblinoverflow.logic.movement.pathfinding.AStar;
 import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class CreatureMover {
 	public final static Coord up = new Coord(0, -1);
@@ -33,30 +34,11 @@ public class CreatureMover {
 			}
 		}
 
-		setGoblinTargets(goblins, gold);
+		setCreatureTargets(goblins, gold);
 		moveGoblins(goblins);
 
-		setCreatureTargets(otherCreatures, goblins);
-		moveCreatures();
-	}
-
-	public void setGoblinTargets(ArrayList<Creature> goblins, ArrayList<Creature> gold) {
-		for (Creature goblin : goblins) {
-			if (goblin.getCurrentTarget() == null) {
-				Creature target = findClosestGold(goblin, gold);
-				goblin.setCurrentTarget(target);
-			}
-		}
-	}
-
-	public Creature findClosestGold(Creature goblin, ArrayList<Creature> gold) {
-		Creature closestGold = gold.get(0);
-		for (Creature g : gold) {
-			if (goblin.getCoord().distance(g.getCoord()) < goblin.getCoord().distance(closestGold.getCoord())) {
-				closestGold = g;
-			}
-		}
-		return closestGold;
+//		setCreatureTargets(otherCreatures, goblins);
+//		moveCreatures();
 	}
 
 	public void setCreatureTargets(ArrayList<Creature> creatures, ArrayList<Creature> possibleTargets) {
@@ -71,23 +53,38 @@ public class CreatureMover {
 
 	public void moveGoblins(ArrayList<Creature> goblins) {
 		for (Creature goblin : goblins){
-			boolean walked = false;
-			while (!walked)
+			AStar aStar = new AStar(Simulation.findEmptyTiles(true), Simulation.getGameMap().creatureLocation(goblin), Simulation.getGameMap().creatureLocation(goblin.getCurrentTarget()));
+			Tile nextStep = aStar.findPath(true);
+			goblin.setCoord(nextStep.getCoord());
+			if (goblin.getCoord().equals(goblin.getCurrentTarget().getCoord())) {
+				goblin.setCurrentTarget(null);
+			}
+			for (Creature creature : Simulation.getCreatures())
 			{
-				Random random = new Random();
-				int randomIndex = random.nextInt(directions.length);
-				Coord randomDirection = directions[randomIndex];
-				if (!Simulation.getGameMap().getTile(goblin.getX() + randomDirection.getX(), goblin.getY() + randomDirection.getY()).getName().equals("wall"))
+				if (creature.getCoord().equals(goblin.getCoord()))
 				{
-					goblin.setX(goblin.getX() + randomDirection.getX());
-					goblin.setY(goblin.getY() + randomDirection.getY());
-					walked = true;
+					switch(creature.getName())
+					{
+						case "gold":
+							creature = null;
+							Simulation.getCreatures().remove(creature);
+							break;
+						case "goblin":
+							Creature newGoblin = new Creature("goblin", goblin.getX(), goblin.getY());
+							Simulation.getCreatures().add(newGoblin);
+							break;
+						default:
+							break;
+					}
 				}
 			}
+			aStar = null;
 		}
 	}
 
 	public void moveCreatures() {
 
 	}
+
+
 }

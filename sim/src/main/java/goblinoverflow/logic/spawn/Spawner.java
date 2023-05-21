@@ -6,11 +6,9 @@ import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
 
-import static java.lang.System.exit;
-
 public class Spawner {
 	public void updateMap() {
-		ArrayList<Coord> emptyTiles = Simulation.findEmptyTiles();
+		ArrayList<Coord> emptyTiles = Simulation.findEmptyTilesCoord(false);
 		addGold(emptyTiles);
 	}
 

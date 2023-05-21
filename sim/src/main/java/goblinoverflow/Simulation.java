@@ -2,6 +2,7 @@ package goblinoverflow;
 
 import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
+import goblinoverflow.entities.tiles.Tile;
 import goblinoverflow.gui.Interface;
 import goblinoverflow.logic.movement.CreatureMover;
 import goblinoverflow.logic.spawn.Spawner;
@@ -44,11 +45,11 @@ public class Simulation implements Runnable {
 		return gameMap;
 	}
 
-	public static ArrayList<Coord> findEmptyTiles() {
+	public static ArrayList<Coord> findEmptyTilesCoord(boolean doors) {
 		ArrayList<Coord> emptyTiles = new ArrayList<>();
 		for (int x = 0; x < getMapTileWidth(); x++) {
 			for (int y = 0; y < getMapTileHeight(); y++) {
-				if (getGameMap().getTile(x, y).getName().equals("floor")) {
+				if (getGameMap().getTile(x, y).getName().equals("floor") || (doors && getGameMap().getTile(x, y).getName().equals("door"))) {
 					boolean isEmpty = true;
 					for (Creature creature : getCreatures()) {
 						if (creature.getX() == x && creature.getY() == y) {
@@ -61,6 +62,14 @@ public class Simulation implements Runnable {
 					}
 				}
 			}
+		}
+		return emptyTiles;
+	}
+
+	public static ArrayList<Tile> findEmptyTiles(boolean doors){
+		ArrayList<Tile> emptyTiles = new ArrayList<>();
+		for (Coord cord : findEmptyTilesCoord(doors)){
+			emptyTiles.add(getGameMap().getTile(cord.getX(), cord.getY()));
 		}
 		return emptyTiles;
 	}
@@ -80,7 +89,7 @@ public class Simulation implements Runnable {
 	@Override
 	public void run() {
 		int iteration = 0;
-		spawner.addGoblins(findEmptyTiles());
+		spawner.addGoblins(findEmptyTilesCoord(false));
 		spawner.updateMap();
 		while (true) {
 			long start = System.nanoTime();
@@ -114,7 +123,7 @@ public class Simulation implements Runnable {
 	}
 
 	private void redraw() {
-		gui.repaint();
 		gui.getGamePanel().repaint();
+		gui.repaint();
 	}
 }

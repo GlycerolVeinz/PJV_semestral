@@ -60,10 +60,9 @@ public class GamePanel extends JPanel{
 
         drawMap(g2d);
 
-        ArrayList<Creature> creatures = Simulation.getCreatures();
-        if (creatures.size() > 0) {
-            for (Creature creat : creatures) {
-                g2d.drawImage(creat.getTexture(), creat.getX() * getTileSize(), creat.getY() * getTileSize(), null);
+        if (Simulation.getCreatures().size() > 0) {
+            for (Creature creature : Simulation.getCreatures()) {
+                g2d.drawImage(creature.getTexture(), creature.getX() * getTileSize(), creature.getY() * getTileSize(), null);
             }
         }
 

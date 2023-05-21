@@ -1,6 +1,7 @@
 package goblinoverflow.entities;
 
 import goblinoverflow.gui.panels.GamePanel;
+import goblinoverflow.util.Coord;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,10 +24,6 @@ public class Entity
         this.name = name;
         this.x = x;
         this.y = y;
-    }
-
-    public void draw(Graphics2D g2d, BufferedImage image) {
-//        TODO: draw entity
     }
 
     public void getEntityTexture(String name, char mode) {
@@ -68,11 +65,19 @@ public class Entity
     public int getY() {
         return y;
     }
+    public Coord getCoord() {
+        return new Coord(getX(), getY());
+    }
 
     public void setTexture(BufferedImage image) {
         this.texture = image;
     }
     public BufferedImage getTexture() {
         return texture;
+    }
+
+    public void setCoord(Coord coord) {
+        setX(coord.getX());
+        setY(coord.getY());
     }
 }
