@@ -95,4 +95,23 @@ public class Creature extends Entity {
 		creatureCount = wolfCount + humanCount + zombieCount + skeletonCount;
 	}
 
+	public static int getGoblinCount() {
+		return goblinCount;
+	}
+
+	public static int getWolfCount() {
+		return wolfCount;
+	}
+
+	public static int getHumanCount() {
+		return humanCount;
+	}
+
+	public static int getZombieCount() {
+		return zombieCount;
+	}
+
+	public static int getSkeletonCount() {
+		return skeletonCount;
+	}
 }

@@ -43,4 +43,12 @@ public class Interface extends JFrame
     public GamePanel getGamePanel() {
         return gamePanel;
     }
+
+    public goblinoverflow.gui.panels.SideStatsPanel getSideStatsPanel() {
+        return SideStatsPanel;
+    }
+
+    public void update(){
+        SideStatsPanel.updateCounts();
+    }
 }

@@ -4,6 +4,7 @@ import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.entities.tiles.Tile;
 import goblinoverflow.gui.Interface;
+import goblinoverflow.gui.panels.SideStatsPanel;
 import goblinoverflow.logic.movement.CreatureMover;
 import goblinoverflow.logic.spawn.Spawner;
 import goblinoverflow.util.Coord;
@@ -124,6 +125,6 @@ public class Simulation implements Runnable {
 
 	private void redraw() {
 		gui.getGamePanel().repaint();
-		gui.repaint();
+		gui.update();
 	}
 }
