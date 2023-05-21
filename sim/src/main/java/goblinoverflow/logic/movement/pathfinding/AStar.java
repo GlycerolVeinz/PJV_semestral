@@ -68,7 +68,7 @@ public class AStar {
 	}
 
 	private Tile reconstructPath(Tile current) {
-		while (current.getParent() != getStart()) {
+		while (current.getParent() != getStart() || current.getParent().getCoord() == current.getCoord()) {
 			current = current.getParent();
 		}
 		return current;

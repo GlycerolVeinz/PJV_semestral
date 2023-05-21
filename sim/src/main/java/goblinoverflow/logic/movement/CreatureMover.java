@@ -52,6 +52,9 @@ public class CreatureMover {
 	}
 
 	public void moveGoblins(ArrayList<Creature> goblins) {
+		ArrayList<Creature> toRemove = new ArrayList<>();
+		ArrayList<Creature> toAdd = new ArrayList<>();
+
 		for (Creature goblin : goblins){
 			AStar aStar = new AStar(Simulation.findEmptyTiles(true), Simulation.getGameMap().creatureLocation(goblin), Simulation.getGameMap().creatureLocation(goblin.getCurrentTarget()));
 			Tile nextStep = aStar.findPath(true);
@@ -61,25 +64,25 @@ public class CreatureMover {
 			}
 			for (Creature creature : Simulation.getCreatures())
 			{
-				if (creature.getCoord().equals(goblin.getCoord()))
-				{
-					switch(creature.getName())
-					{
+				if (creature.getCoord().equals(goblin.getCoord()) && (creature != goblin)) {
+					switch (creature.getName()) {
 						case "gold":
-							creature = null;
-							Simulation.getCreatures().remove(creature);
+							toRemove.add(creature);
 							break;
 						case "goblin":
 							Creature newGoblin = new Creature("goblin", goblin.getX(), goblin.getY());
-							Simulation.getCreatures().add(newGoblin);
+							toAdd.add(newGoblin);
 							break;
 						default:
 							break;
 					}
 				}
 			}
+
 			aStar = null;
 		}
+		Simulation.getCreatures().removeAll(toRemove);
+//		Simulation.getCreatures().addAll(toAdd);
 	}
 
 	public void moveCreatures() {

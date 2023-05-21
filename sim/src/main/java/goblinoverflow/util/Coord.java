@@ -1,5 +1,7 @@
 package goblinoverflow.util;
 
+import java.util.Objects;
+
 public class Coord {
 	private int x;
 	private int y;
@@ -27,5 +29,13 @@ public class Coord {
 
 	public int distance(Coord coord) {
 		return Math.abs(coord.getX() - this.getX()) + Math.abs(coord.getY() - this.getY());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Coord)) return false;
+		Coord coord = (Coord) o;
+		return getX() == coord.getX() && getY() == coord.getY();
 	}
 }
