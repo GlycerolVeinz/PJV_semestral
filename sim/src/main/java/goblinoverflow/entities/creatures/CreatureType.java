@@ -1,5 +1,8 @@
 package goblinoverflow.entities.creatures;
 
+/**
+* Enum class for Creature names.
+* */
 public enum CreatureType {
 	GOBLIN("goblin"),
 	GOLD("gold"),

@@ -7,14 +7,27 @@ import goblinoverflow.gui.panels.GamePanel;
 
 import java.awt.event.MouseAdapter;
 
-public class EntitySpawnMouseListener extends MouseAdapter {
+/**
+ * Listener class for entity spawn.
+ * */
+public class CreatureSpawnMouseListener extends MouseAdapter {
 	private final CreatureType currentCreature;
 
-	public EntitySpawnMouseListener(CreatureType currentCreature) {
+	/**
+	 * Constructor for spawn creatures listener.
+	 * @param currentCreature - creature type to spawn
+	* */
+	public CreatureSpawnMouseListener(CreatureType currentCreature) {
 		super();
 		this.currentCreature = currentCreature;
 	}
 
+	/**
+	 * Listens for mouse clicks.
+	 * Spawns a creature on position where clicked.
+	 * (only on GamePanel)
+	 * @param e - event that triggered the listener
+	 * */
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		int x = e.getX() / GamePanel.getTileSize();
@@ -30,6 +43,17 @@ public class EntitySpawnMouseListener extends MouseAdapter {
 		}
 	}
 
+	public CreatureType getCurrentCreature() {
+		return currentCreature;
+	}
+
+	/**
+	 * Checks if tile is empty from any Entity.
+	 * (only "floor" tiles are allowed)
+	 * @param x - x coordinate of tile
+	 * @param y - y coordinate of tile
+	 * @return true if tile is empty, false otherwise
+	 * */
 	private boolean isTileEmpty(int x, int y) {
 		boolean isEmpty = true;
 		if (Simulation.getGameMap().getTile(x, y).getName().equals("floor")) {
@@ -43,9 +67,5 @@ public class EntitySpawnMouseListener extends MouseAdapter {
 			isEmpty = false;
 		}
 		return isEmpty;
-	}
-
-	public CreatureType getCurrentCreature() {
-		return currentCreature;
 	}
 }

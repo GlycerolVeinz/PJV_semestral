@@ -10,6 +10,11 @@ import goblinoverflow.util.Coord;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+* Main simulation logic class, that moves every creature.
+*
+* @Coord[] directions array of all possible directions that creatures can move in.
+* */
 public class CreatureMover {
 	public final static Coord up = new Coord(0, -1);
 	public final static Coord down = new Coord(0, +1);
@@ -21,6 +26,12 @@ public class CreatureMover {
 	public final static Coord downRight = new Coord(+1, +1);
 	public final static Coord[] directions = {up, down, left, right, upLeft, upRight, downLeft, downRight};
 
+	/**
+	* Main move method.
+	* Gives target to every Creature that doesn't have one.
+	* Move everyone by 2 tiles, except goblins.
+	* Moves goblins after everyone else.
+	* */
 	public void moveAllCreatures() {
 		ArrayList<Creature> goblins = new ArrayList<>();
 		ArrayList<Creature> otherCreatures = new ArrayList<>();
@@ -42,9 +53,15 @@ public class CreatureMover {
 
 		setCreatureTargets(goblins, gold);
 		moveGoblins(goblins);
-
 	}
 
+	/**
+	* Sets target for every creature that doesn't have one.
+	* Picks a random target from possible targets.
+	*
+	* @param creatures list of all creatures that should have a target
+	* @param possibleTargets list of all possible targets
+	* */
 	public void setCreatureTargets(ArrayList<Creature> creatures, ArrayList<Creature> possibleTargets) {
 		for (Creature creature : creatures) {
 			if (creature.getCurrentTarget() == null) {
@@ -55,6 +72,13 @@ public class CreatureMover {
 		}
 	}
 
+	/**
+	* Method that moves every goblin by 1 tile.
+	* Decides path using AStar class.
+	* Processes goblin interactions with gold and other goblins.
+	*
+	* @param goblins list of all goblins
+	* */
 	public void moveGoblins(ArrayList<Creature> goblins) {
 		ArrayList<Creature> toRemove = new ArrayList<>();
 		ArrayList<Creature> toAdd = new ArrayList<>();
@@ -71,11 +95,11 @@ public class CreatureMover {
 			}
 			for (Creature creature : Simulation.getCreatures()) {
 				if (creature.getCoord().equals(goblin.getCoord()) && (creature != goblin)) {
-					switch (creature.getName()) {
-						case "gold":
+					switch (creature.getType()) {
+						case GOLD:
 							toRemove.add(creature);
 							break;
-						case "goblin":
+						case GOBLIN:
 							Creature newGoblin = new Creature(CreatureType.GOBLIN, goblin.getX(), goblin.getY());
 							toAdd.add(newGoblin);
 							break;
@@ -94,6 +118,14 @@ public class CreatureMover {
 		Simulation.getCreatures().addAll(toAdd);
 	}
 
+
+	/**
+	 * Method that moves every creature by 1 tile.
+	 * Decides path using AStar class.
+	 * Processes creature interactions, mainly fight with goblins.
+	 *
+	 * @param creatures list of all creatures
+	 * */
 	public void moveCreatures(ArrayList<Creature> creatures) {
 		ArrayList<Creature> toRemove = new ArrayList<>();
 		ArrayList<Creature> toAdd = new ArrayList<>();

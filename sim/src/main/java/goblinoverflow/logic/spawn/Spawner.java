@@ -7,12 +7,24 @@ import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
 
+/**
+ * Spawner class is responsible for spawning goblins and gold.
+ */
 public class Spawner {
+
+	/**
+	* Updates map by spawning 10 gold coins on empty tiles
+	* */
 	public void updateMap() {
-		ArrayList<Coord> emptyTiles = Simulation.findEmptyTilesCoord(false);
-		addGold(emptyTiles);
+		addGold(Simulation.findEmptyTilesCoord(false));
 	}
 
+	/**
+	* Method that generates 10 different random coordinates and spawns gold on them.
+	* Gold is categorized as a creature for the sake of simplicity.
+	*
+	* @param emptyTiles list of tiles from the map (preferably empty)
+	* */
 	private void addGold(ArrayList<Coord> emptyTiles){
 		for (int i = 0; i < 10; i++) {
 			int randomIndex = (int) (Math.random() * emptyTiles.size());
@@ -25,9 +37,13 @@ public class Spawner {
 		}
 	}
 
-
+	/**
+	 * Method that generates 5 different random coordinates and spawns goblins on them.
+	 * Gold is categorized as a creature for the sake of simplicity.
+	 *
+	 * @param emptyTiles list of tiles from the map (preferably empty)
+	 * */
 	public void addGoblins(ArrayList<Coord> emptyTiles) {
-//	only for initial spawn of goblins
 			for (int i = 0; i < 5; i++) {
 				int randomIndex = (int) (Math.random() * emptyTiles.size());
 				Coord randomCoord = emptyTiles.get(randomIndex);

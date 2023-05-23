@@ -10,6 +10,18 @@ import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
 
+/**
+ * Simulation class is responsible for running the game.
+ * It contains the main game loop. It can do so by being runnable.
+ * Connects logic, gui and model.
+ * It also has implementation of vsync of drawing frames.
+ * <p>
+ * @Interface gui
+ * @Map model
+ * @CreatureMover logic
+ * </p>
+ * @author glycerolveinz
+ */
 public class Simulation implements Runnable {
 	private final static int mapTileWidth = 32;
 	private final static int mapTileHeight = 24;
@@ -18,11 +30,19 @@ public class Simulation implements Runnable {
 	private final static CreatureMover creatureMover = new CreatureMover();
 	private static final ArrayList<Creature> creatures = new ArrayList<>();
 	final String name;
-	final int framesPerSecond = 1;
-	final int timePerLoop = 1000000000 / framesPerSecond;
+	final static int framesPerSecond = 1;
+	final static int timePerLoop = 1000000000 / framesPerSecond;
 	private final Interface gui;
 	private boolean isRunning;
 
+	/**
+	 * Simulation constructor.
+	 * Sets simulation state to not running.
+	 * Creates gui of the simulation.
+	 *
+	 * @param name name of the simulation.
+	 *             Also name of the frame that will display the simulation.
+	 */
 	public Simulation(String name) {
 		this.name = name;
 		this.isRunning = false;
@@ -32,19 +52,31 @@ public class Simulation implements Runnable {
 	public static ArrayList<Creature> getCreatures() {
 		return creatures;
 	}
-
 	public static int getMapTileWidth() {
 		return mapTileWidth;
 	}
-
 	public static int getMapTileHeight() {
 		return mapTileHeight;
 	}
-
 	public static Map getGameMap() {
 		return gameMap;
 	}
+	public Interface getGui() {
+		return gui;
+	}
+	public boolean isRunning() {
+		return isRunning;
+	}
+	public void setRunning(boolean running) {
+		isRunning = running;
+	}
 
+	/**
+	 * Method that finds all coordinates of empty tiles on the map.
+	 *
+	 * @param doors if true, it will also return coordinates of doors.
+	 * @return ArrayList of coordinates of empty tiles.
+	 */
 	public static ArrayList<Coord> findEmptyTilesCoord(boolean doors) {
 		ArrayList<Coord> emptyTiles = new ArrayList<>();
 		for (int x = 0; x < getMapTileWidth(); x++) {
@@ -66,26 +98,23 @@ public class Simulation implements Runnable {
 		return emptyTiles;
 	}
 
-	public static ArrayList<Tile> findEmptyTiles(boolean doors){
+	/**
+	 * Method that finds all empty tiles on the map.
+	 *
+	 * @param doors if true, it will also return doors.
+	 * @return ArrayList of empty tiles.
+	 */
+	public static ArrayList<Tile> findEmptyTiles(boolean doors) {
 		ArrayList<Tile> emptyTiles = new ArrayList<>();
-		for (Coord cord : findEmptyTilesCoord(doors)){
+		for (Coord cord : findEmptyTilesCoord(doors)) {
 			emptyTiles.add(getGameMap().getTile(cord.getX(), cord.getY()));
 		}
 		return emptyTiles;
 	}
 
-	public Interface getGui() {
-		return gui;
-	}
-
-	public boolean isRunning() {
-		return isRunning;
-	}
-
-	public void setRunning(boolean running) {
-		isRunning = running;
-	}
-
+	/**
+	 * Method that runs the simulation (main game loop).
+	 */
 	@Override
 	public void run() {
 		int iteration = 0;
@@ -115,6 +144,12 @@ public class Simulation implements Runnable {
 		}
 	}
 
+	/**
+	 * Update game logic.
+	 *
+	 * @param iteration number of iteration of the main game loop.
+	 *                  (should be modulo of frames per second)
+	 */
 	private void update(int iteration) {
 		if (iteration == 0) {
 			spawner.updateMap();
@@ -122,6 +157,9 @@ public class Simulation implements Runnable {
 		creatureMover.moveAllCreatures();
 	}
 
+	/**
+	 * Updates game dui.
+	 */
 	private void redraw() {
 		gui.getGamePanel().repaint();
 		gui.update();

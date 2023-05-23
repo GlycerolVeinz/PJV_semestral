@@ -10,9 +10,22 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Map class that holds all tiles in one place (map).
+ */
 public class Map {
 	private final Tile[][] tiles;
 
+	/**
+	 * Map constructor.
+	 * Creates a map based on .txt file in resources of a given size.
+	 * Exits with code 101 if fails to load the file.
+	 * @param Height Height of the map.
+	 * @param Width  Width of the map.
+	 * <p>
+	 * (sizes are in tiles not pixels)
+	 * </p>
+	 */
 	public Map(int Height, int Width) {
 		tiles = new Tile[Height][Width];
 
@@ -43,21 +56,28 @@ public class Map {
 		return tiles[y][x];
 	}
 
+	public Tile creatureLocation(Creature creature) {
+		return tiles[creature.getY()][creature.getX()];
+	}
+
+	/**
+	 * Returns a list of all neighbours of a given tile.
+	 *
+	 * @param tile Tile to get neighbours of.
+	 * @return List of all neighbours of a given tile.
+	 * (ALL NEIGHBOURS, even walls)
+	 */
 	public ArrayList<Tile> getNeighbours(Tile tile) {
 		ArrayList<Tile> neighbours = new ArrayList<>();
 		int x = tile.getX();
 		int y = tile.getY();
-		for (Coord dir : CreatureMover.directions){
+		for (Coord dir : CreatureMover.directions) {
 			int newX = x + dir.getX();
 			int newY = y + dir.getY();
-			if (newX >= 0 && newX < Simulation.getMapTileWidth() && newY >= 0 && newY < Simulation.getMapTileHeight()){
+			if (newX >= 0 && newX < Simulation.getMapTileWidth() && newY >= 0 && newY < Simulation.getMapTileHeight()) {
 				neighbours.add(getTile(newX, newY));
 			}
 		}
 		return neighbours;
-	}
-
-	public Tile creatureLocation(Creature creature) {
-		return tiles[creature.getY()][creature.getX()];
 	}
 }

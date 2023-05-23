@@ -7,14 +7,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Panel class that displays buttons for adding entities
+ */
 public class BottomButtonPanel extends JPanel
 {
-    final static int BUTTONS_COUNT = 4;
+    final static int buttonsCount = 4;
     private final ArrayList<EntityButton> buttons = new ArrayList<>();
 
+    /**
+     * BottomButtonPanel constructor.
+     * Creates panel and adds buttons to it.
+     * Sets creature type for each button (needed for creature spawning).
+     *
+     * @param color - background-color of the panel
+     * @param gamePanel - main game-loop object that needs to be animated.
+     */
     public BottomButtonPanel(Color color, GamePanel gamePanel)
     {
-        this.setLayout(new GridLayout(1, BUTTONS_COUNT));
+        this.setLayout(new GridLayout(1, buttonsCount));
         this.setPreferredSize(new Dimension(100, 50));
         this.setBackground(color);
 

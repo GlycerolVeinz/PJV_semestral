@@ -1,11 +1,18 @@
 package goblinoverflow.util;
 
-import java.util.Objects;
-
+/**
+ * Class for storing coordinates, made for utility and comfort purposes.
+ * */
 public class Coord {
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 
+	/**
+	 * Constructor for Coord class.
+	 *
+	 * @param x x coordinate.
+	 * @param y y coordinate.
+	 * */
 	public Coord(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -17,18 +24,6 @@ public class Coord {
 
 	public int getY() {
 		return y;
-	}
-
-	public void setX(int x){
-		this.x = x;
-	}
-
-	public void setY(int y){
-		this.y = y;
-	}
-
-	public int distance(Coord coord) {
-		return Math.abs(coord.getX() - this.getX()) + Math.abs(coord.getY() - this.getY());
 	}
 
 	@Override
