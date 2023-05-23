@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class SideStatsPanel extends JPanel {
 
-	private JLabel goblinCount;
-	private JLabel humanCount;
-	private JLabel wolfCount;
-	private JLabel zombieCount;
-	private JLabel skeletonCount;
+	private final JLabel goblinCount;
+	private final JLabel humanCount;
+	private final JLabel wolfCount;
+	private final JLabel zombieCount;
+	private final JLabel skeletonCount;
 
 	public SideStatsPanel(Color color) {
 		this.setPreferredSize(new Dimension(150, 100));

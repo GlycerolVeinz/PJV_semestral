@@ -6,7 +6,6 @@ import goblinoverflow.entities.tiles.Map;
 
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 

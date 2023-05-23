@@ -22,7 +22,6 @@ public class Map {
 				String line = reader.readLine();
 				for (int x = 0; x < Width; ++x) {
 					char glyph = line.charAt(x);
-					String tileName = "";
 					if (glyph == '#') {
 						tiles[y][x] = new Tile("wall", x, y);
 					} else if (glyph == '.') {
@@ -60,9 +59,5 @@ public class Map {
 
 	public Tile creatureLocation(Creature creature) {
 		return tiles[creature.getY()][creature.getX()];
-	}
-
-	public Tile[][] getTiles() {
-		return tiles;
 	}
 }

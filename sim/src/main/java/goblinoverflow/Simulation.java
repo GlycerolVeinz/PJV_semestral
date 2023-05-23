@@ -4,7 +4,6 @@ import goblinoverflow.entities.creatures.Creature;
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.entities.tiles.Tile;
 import goblinoverflow.gui.Interface;
-import goblinoverflow.gui.panels.SideStatsPanel;
 import goblinoverflow.logic.movement.CreatureMover;
 import goblinoverflow.logic.spawn.Spawner;
 import goblinoverflow.util.Coord;

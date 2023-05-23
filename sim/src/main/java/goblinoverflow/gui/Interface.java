@@ -11,8 +11,6 @@ import java.awt.*;
 public class Interface extends JFrame
 {
     private final GamePanel gamePanel;
-    private final BottomButtonPanel bottomButtonPanel;
-    private final SideButtonPanel sideButtonPanel;
     private final SideStatsPanel SideStatsPanel;
 
     final Color sidePanelsColor = Color.DARK_GRAY;
@@ -26,10 +24,10 @@ public class Interface extends JFrame
         this.gamePanel = new GamePanel(gameMap);
         window.add(gamePanel, BorderLayout.CENTER);
 
-        this.bottomButtonPanel = new BottomButtonPanel(sidePanelsColor, gamePanel);
+        BottomButtonPanel bottomButtonPanel = new BottomButtonPanel(sidePanelsColor, gamePanel);
         window.add(bottomButtonPanel, BorderLayout.SOUTH);
 
-        this.sideButtonPanel = new SideButtonPanel(sidePanelsColor, sim);
+        SideButtonPanel sideButtonPanel = new SideButtonPanel(sidePanelsColor, sim);
         window.add(sideButtonPanel, BorderLayout.EAST);
 
         this.SideStatsPanel = new SideStatsPanel(sidePanelsColor);
@@ -42,10 +40,6 @@ public class Interface extends JFrame
 
     public GamePanel getGamePanel() {
         return gamePanel;
-    }
-
-    public goblinoverflow.gui.panels.SideStatsPanel getSideStatsPanel() {
-        return SideStatsPanel;
     }
 
     public void update(){

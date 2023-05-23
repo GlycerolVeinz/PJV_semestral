@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class BottomButtonPanel extends JPanel
 {
     final static int BUTTONS_COUNT = 4;
-    private ArrayList<EntityButton> buttons = new ArrayList<>();
+    private final ArrayList<EntityButton> buttons = new ArrayList<>();
 
     public BottomButtonPanel(Color color, GamePanel gamePanel)
     {

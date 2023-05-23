@@ -15,7 +15,7 @@ public class Creature extends Entity {
 	private static int creatureCount = 0;
 
 	private Creature currentTarget;
-	private CreatureType type;
+	private final CreatureType type;
 
 	public Creature(CreatureType type, int x, int y) {
 		super(type.getName(), x, y);
@@ -58,11 +58,6 @@ public class Creature extends Entity {
 
 	public void setCurrentTarget(Creature currentTarget) {
 		this.currentTarget = currentTarget;
-	}
-
-	public void moveBy(int dx, int dy) {
-		setX(getX() + dx);
-		setY(getY() + dy);
 	}
 
 	public static void creatureDied(CreatureType creature){

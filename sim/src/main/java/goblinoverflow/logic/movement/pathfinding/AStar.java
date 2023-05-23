@@ -6,16 +6,14 @@ import goblinoverflow.entities.tiles.Tile;
 import java.util.ArrayList;
 
 public class AStar {
-	private ArrayList<Tile> openList;
-	private ArrayList<Tile> closedList;
-	private ArrayList<Tile> map;
-	private Tile start;
-	private Tile end;
+	private final ArrayList<Tile> openList;
+	private final ArrayList<Tile> closedList;
+	private final Tile start;
+	private final Tile end;
 
-	public AStar(ArrayList<Tile> map, Tile start, Tile end) {
+	public AStar(Tile start, Tile end) {
 		this.openList = new ArrayList<>();
 		this.closedList = new ArrayList<>();
-		this.map = map;
 		this.start = start;
 		this.end = end;
 	}
@@ -74,7 +72,4 @@ public class AStar {
 		return current;
 	}
 
-	public void setStart(Tile start) {
-		this.start = start;
-	}
 }

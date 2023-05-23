@@ -65,7 +65,7 @@ public class AppTest
         Random rand = new Random();
         Tile start = emptyTiles.get(rand.nextInt(emptyTiles.size()));
         Tile end = emptyTiles.get(rand.nextInt(emptyTiles.size()));
-        AStar aStar = new AStar(emptyTiles, start, end);
+        AStar aStar = new AStar(start, end);
 
         aStar.findPath(true);
         Tile current = end;

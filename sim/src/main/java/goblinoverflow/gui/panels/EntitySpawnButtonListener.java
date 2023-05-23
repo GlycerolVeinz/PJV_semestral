@@ -4,7 +4,6 @@ import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.gui.panels.buttons.EntityButton;
 import goblinoverflow.gui.panels.listeners.EntitySpawnMouseListener;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +36,6 @@ public class EntitySpawnButtonListener implements ActionListener {
 			button.setListener(null);
 		}
 		else if (button.isBlocked()) {
-			return;
 		} else {
 			button.setPressed(true);
 			button.setBackground(Color.BLACK);

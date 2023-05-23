@@ -5,7 +5,6 @@ import goblinoverflow.gui.panels.buttons.StartButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class SideButtonPanel extends JPanel {
 	final int buttonsCount = 4;

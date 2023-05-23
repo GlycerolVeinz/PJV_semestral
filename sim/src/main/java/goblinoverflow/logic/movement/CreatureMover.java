@@ -63,7 +63,7 @@ public class CreatureMover {
 			if (goblin.getCurrentTarget() == null) {
 				continue;
 			}
-			AStar aStar = new AStar(Simulation.findEmptyTiles(true), Simulation.getGameMap().creatureLocation(goblin), Simulation.getGameMap().creatureLocation(goblin.getCurrentTarget()));
+			AStar aStar = new AStar(Simulation.getGameMap().creatureLocation(goblin), Simulation.getGameMap().creatureLocation(goblin.getCurrentTarget()));
 			Tile nextStep = aStar.findPath(true);
 			goblin.setCoord(nextStep.getCoord());
 			if (goblin.getCoord().equals(goblin.getCurrentTarget().getCoord())) {
@@ -102,7 +102,7 @@ public class CreatureMover {
 			if (creature.getCurrentTarget() == null) {
 				continue;
 			}
-			AStar aStar = new AStar(Simulation.findEmptyTiles(false), Simulation.getGameMap().creatureLocation(creature), Simulation.getGameMap().creatureLocation(creature.getCurrentTarget()));
+			AStar aStar = new AStar(Simulation.getGameMap().creatureLocation(creature), Simulation.getGameMap().creatureLocation(creature.getCurrentTarget()));
 			Tile nextStep = aStar.findPath(false);
 			if (nextStep != null) {
 				creature.setCoord(nextStep.getCoord());

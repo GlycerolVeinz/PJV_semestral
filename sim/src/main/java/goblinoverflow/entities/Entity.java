@@ -1,10 +1,8 @@
 package goblinoverflow.entities;
 
-import goblinoverflow.gui.panels.GamePanel;
 import goblinoverflow.util.Coord;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -18,8 +16,6 @@ public class Entity
 
     protected BufferedImage texture;
     private final String name;
-    private static GamePanel gamePanel;
-
     public Entity(String name, int x, int y) {
         this.name = name;
         this.x = x;

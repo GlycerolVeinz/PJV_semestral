@@ -8,7 +8,7 @@ import goblinoverflow.gui.panels.GamePanel;
 import java.awt.event.MouseAdapter;
 
 public class EntitySpawnMouseListener extends MouseAdapter {
-	private CreatureType currentCreature;
+	private final CreatureType currentCreature;
 
 	public EntitySpawnMouseListener(CreatureType currentCreature) {
 		super();
