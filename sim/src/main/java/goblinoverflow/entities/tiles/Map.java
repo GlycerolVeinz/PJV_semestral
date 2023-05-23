@@ -61,4 +61,8 @@ public class Map {
 	public Tile creatureLocation(Creature creature) {
 		return tiles[creature.getY()][creature.getX()];
 	}
+
+	public Tile[][] getTiles() {
+		return tiles;
+	}
 }

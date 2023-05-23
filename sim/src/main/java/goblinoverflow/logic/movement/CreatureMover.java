@@ -2,6 +2,7 @@ package goblinoverflow.logic.movement;
 
 import goblinoverflow.Simulation;
 import goblinoverflow.entities.creatures.Creature;
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.entities.tiles.Tile;
 import goblinoverflow.logic.movement.pathfinding.AStar;
 import goblinoverflow.util.Coord;
@@ -75,7 +76,7 @@ public class CreatureMover {
 							toRemove.add(creature);
 							break;
 						case "goblin":
-							Creature newGoblin = new Creature("goblin", goblin.getX(), goblin.getY());
+							Creature newGoblin = new Creature(CreatureType.GOBLIN, goblin.getX(), goblin.getY());
 							toAdd.add(newGoblin);
 							break;
 						default:
@@ -101,17 +102,19 @@ public class CreatureMover {
 			if (creature.getCurrentTarget() == null) {
 				continue;
 			}
-			AStar aStar = new AStar(Simulation.findEmptyTiles(true), Simulation.getGameMap().creatureLocation(creature), Simulation.getGameMap().creatureLocation(creature.getCurrentTarget()));
-			Tile nextStep = aStar.findPath(true);
-			creature.setCoord(nextStep.getCoord());
-
+			AStar aStar = new AStar(Simulation.findEmptyTiles(false), Simulation.getGameMap().creatureLocation(creature), Simulation.getGameMap().creatureLocation(creature.getCurrentTarget()));
+			Tile nextStep = aStar.findPath(false);
+			if (nextStep != null) {
+				creature.setCoord(nextStep.getCoord());
+			}
 			if (creature.getCoord().equals(creature.getCurrentTarget().getCoord())) {
 				creature.setCurrentTarget(null);
 			}
+
 			for (Creature otherCreature : Simulation.getCreatures()) {
 				if (otherCreature.getCoord().equals(creature.getCoord()) && (otherCreature != creature)) {
-					switch (otherCreature.getName()) {
-						case "goblin":
+					switch (otherCreature.getType()) {
+						case GOBLIN:
 							Random fight = new Random();
 							int fightResult = fight.nextInt(100);
 							if (fightResult < 90){
@@ -122,18 +125,18 @@ public class CreatureMover {
 							}
 							fight = null;
 							break;
-						case "human":
-							if (creature.getName().equals("skeleton") || creature.getName().equals("wolf")) {
+						case HUMAN:
+							if (creature.getType().equals(CreatureType.SKELETON) || creature.getType().equals(CreatureType.WOLF)) {
 								toRemove.add(otherCreature);
 							}
-							else if (creature.getName().equals("zombie")) {
+							else if (creature.getType().equals(CreatureType.ZOMBIE)) {
 								toRemove.add(otherCreature);
-								Creature newZombie = new Creature("zombie", creature.getX(), creature.getY());
+								Creature newZombie = new Creature(CreatureType.ZOMBIE, creature.getX(), creature.getY());
 								toAdd.add(newZombie);
 							}
 							break;
-						case "wolf":
-							if (creature.getName().equals("Zombie")) {
+						case WOLF:
+							if (creature.getType().equals(CreatureType.ZOMBIE)) {
 								toRemove.add(otherCreature);
 							}
 						default:
@@ -146,7 +149,7 @@ public class CreatureMover {
 
 		Simulation.getCreatures().removeAll(toRemove);
 		for (Creature creature : toRemove) {
-			Creature.creatureDied(creature);
+			Creature.creatureDied(creature.getType());
 			creature = null;
 		}
 		Simulation.getCreatures().addAll(toAdd);

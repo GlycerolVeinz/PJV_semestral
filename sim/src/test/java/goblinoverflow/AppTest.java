@@ -1,14 +1,16 @@
 package goblinoverflow;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import goblinoverflow.entities.tiles.Map;
 import goblinoverflow.entities.tiles.Tile;
+import goblinoverflow.logic.movement.pathfinding.AStar;
 import org.junit.Test;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test for goblin overflow.
@@ -54,5 +56,26 @@ public class AppTest
             mapLoad = true;
         }
         assertFalse(mapLoad);
+    }
+
+    @Test
+    public void testAStar(){
+        Map map = new Map(24,32);
+        ArrayList<Tile> emptyTiles = Simulation.findEmptyTiles(true);
+        Random rand = new Random();
+        Tile start = emptyTiles.get(rand.nextInt(emptyTiles.size()));
+        Tile end = emptyTiles.get(rand.nextInt(emptyTiles.size()));
+        AStar aStar = new AStar(emptyTiles, start, end);
+
+        aStar.findPath(true);
+        Tile current = end;
+        while (!current.getParent().equals(start)) {
+            current = aStar.reconstructPath(current);
+            if (current == null) {
+                fail();
+            }
+        }
+
+        assertTrue(true);
     }
 }

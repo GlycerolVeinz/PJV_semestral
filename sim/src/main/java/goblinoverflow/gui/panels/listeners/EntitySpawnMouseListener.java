@@ -2,14 +2,15 @@ package goblinoverflow.gui.panels.listeners;
 
 import goblinoverflow.Simulation;
 import goblinoverflow.entities.creatures.Creature;
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.gui.panels.GamePanel;
 
 import java.awt.event.MouseAdapter;
 
 public class EntitySpawnMouseListener extends MouseAdapter {
-	private String currentCreature;
+	private CreatureType currentCreature;
 
-	public EntitySpawnMouseListener(String currentCreature) {
+	public EntitySpawnMouseListener(CreatureType currentCreature) {
 		super();
 		this.currentCreature = currentCreature;
 	}
@@ -44,7 +45,7 @@ public class EntitySpawnMouseListener extends MouseAdapter {
 		return isEmpty;
 	}
 
-	public String getCurrentCreature() {
+	public CreatureType getCurrentCreature() {
 		return currentCreature;
 	}
 }

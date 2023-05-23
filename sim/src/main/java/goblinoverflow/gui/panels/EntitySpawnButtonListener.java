@@ -1,8 +1,10 @@
 package goblinoverflow.gui.panels;
 
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.gui.panels.buttons.EntityButton;
 import goblinoverflow.gui.panels.listeners.EntitySpawnMouseListener;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +46,7 @@ public class EntitySpawnButtonListener implements ActionListener {
 					b.setBlocked(true);
 				}
 			}
-			String currentCreature = button.getName();
+			CreatureType currentCreature = button.getCreatureType();
 			EntitySpawnMouseListener listener = new EntitySpawnMouseListener(currentCreature);
 			getGamePanel().addMouseListener(listener);
 			button.setListener(listener);

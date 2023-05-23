@@ -1,11 +1,6 @@
 package goblinoverflow.entities.creatures;
 
 import goblinoverflow.entities.Entity;
-import goblinoverflow.gui.panels.GamePanel;
-import goblinoverflow.util.Coord;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 import static java.lang.System.exit;
 
@@ -20,27 +15,29 @@ public class Creature extends Entity {
 	private static int creatureCount = 0;
 
 	private Creature currentTarget;
+	private CreatureType type;
 
-	public Creature(String name, int x, int y) {
-		super(name, x, y);
+	public Creature(CreatureType type, int x, int y) {
+		super(type.getName(), x, y);
+		this.type = type;
 		if (creatureCount >= maxEntities) {
 			System.err.println("Max entities reached");
 			throw new RuntimeException("Max entities reached");
 		}
-		switch (name) {
-			case "wolf":
+		switch (type) {
+			case WOLF:
 				wolfCount++;
 				break;
-			case "human":
+			case HUMAN:
 				humanCount++;
 				break;
-			case "zombie":
+			case ZOMBIE:
 				zombieCount++;
 				break;
-			case "skeleton":
+			case SKELETON:
 				skeletonCount++;
 				break;
-			case "goblin":
+			case GOBLIN:
 				goblinCount++;
 				if (goblinCount > maxGoblins) {
 					System.out.println("GOBLIN OVERFLOW");
@@ -51,7 +48,7 @@ public class Creature extends Entity {
 				break;
 		}
 		creatureCount = wolfCount + humanCount + zombieCount + skeletonCount;
-		getEntityTexture(name, 'c');
+		getEntityTexture(type.getName(), 'c');
 	}
 
 
@@ -68,21 +65,21 @@ public class Creature extends Entity {
 		setY(getY() + dy);
 	}
 
-	public static void creatureDied(Creature creature){
-		switch (creature.getName()) {
-			case "wolf":
+	public static void creatureDied(CreatureType creature){
+		switch (creature) {
+			case WOLF:
 				wolfCount--;
 				break;
-			case "human":
+			case HUMAN:
 				humanCount--;
 				break;
-			case "zombie":
+			case ZOMBIE:
 				zombieCount--;
 				break;
-			case "skeleton":
+			case SKELETON:
 				skeletonCount--;
 				break;
-			case "goblin":
+			case GOBLIN:
 				goblinCount--;
 				break;
 			default:
@@ -113,5 +110,9 @@ public class Creature extends Entity {
 
 	public static int getSkeletonCount() {
 		return skeletonCount;
+	}
+
+	public CreatureType getType() {
+		return type;
 	}
 }

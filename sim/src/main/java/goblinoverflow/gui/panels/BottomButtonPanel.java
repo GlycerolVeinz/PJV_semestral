@@ -1,5 +1,6 @@
 package goblinoverflow.gui.panels;
 
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.gui.panels.buttons.EntityButton;
 
 import javax.swing.*;
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 
 public class BottomButtonPanel extends JPanel
 {
-    final int buttonsCount = 4;
+    final static int BUTTONS_COUNT = 4;
     private ArrayList<EntityButton> buttons = new ArrayList<>();
 
     public BottomButtonPanel(Color color, GamePanel gamePanel)
     {
-        this.setLayout(new GridLayout(1, buttonsCount));
+        this.setLayout(new GridLayout(1, BUTTONS_COUNT));
         this.setPreferredSize(new Dimension(100, 50));
         this.setBackground(color);
 
@@ -22,10 +23,10 @@ public class BottomButtonPanel extends JPanel
         EntityButton skellyButton = new EntityButton("add Skelly", this, gamePanel);
         EntityButton wolfButton = new EntityButton("add Wolf", this, gamePanel);
 
-        humanButton.setName("human");
-        zombieButton.setName("zombie");
-        skellyButton.setName("skeleton");
-        wolfButton.setName("wolf");
+        humanButton.setCreatureType(CreatureType.HUMAN);
+        zombieButton.setCreatureType(CreatureType.ZOMBIE);
+        skellyButton.setCreatureType(CreatureType.SKELETON);
+        wolfButton.setCreatureType(CreatureType.WOLF);
 
         buttons.add(humanButton);
         buttons.add(zombieButton);

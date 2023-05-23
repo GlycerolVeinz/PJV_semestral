@@ -80,4 +80,12 @@ public class Entity
         setX(coord.getX());
         setY(coord.getY());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entity)) return false;
+        Entity entity = (Entity) o;
+        return getX() == entity.getX() && getY() == entity.getY() && Objects.equals(getName(), entity.getName());
+    }
 }

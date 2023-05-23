@@ -2,6 +2,7 @@ package goblinoverflow.logic.spawn;
 
 import goblinoverflow.Simulation;
 import goblinoverflow.entities.creatures.Creature;
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.util.Coord;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Spawner {
 			int randomIndex = (int) (Math.random() * emptyTiles.size());
 			Coord randomCoord = emptyTiles.get(randomIndex);
 
-			Creature newGold = new Creature("gold", randomCoord.getX(), randomCoord.getY());
+			Creature newGold = new Creature(CreatureType.GOLD, randomCoord.getX(), randomCoord.getY());
 			Simulation.getCreatures().add(newGold);
 			
 			emptyTiles.remove(randomIndex);
@@ -31,7 +32,7 @@ public class Spawner {
 				int randomIndex = (int) (Math.random() * emptyTiles.size());
 				Coord randomCoord = emptyTiles.get(randomIndex);
 
-				Creature newGoblin = new Creature("goblin", randomCoord.getX(), randomCoord.getY());
+				Creature newGoblin = new Creature(CreatureType.GOBLIN, randomCoord.getX(), randomCoord.getY());
 				Simulation.getCreatures().add(newGoblin);
 
 				emptyTiles.remove(randomIndex);

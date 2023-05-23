@@ -48,9 +48,9 @@ public class AStar {
 					neighbor.setH(neighbor.getDistance(end));
 					neighbor.setF(neighbor.getG() + neighbor.getH());
 					if ((neighbor.getX() == current.getX()) && (neighbor.getY() == current.getY())) {
-						System.out.println("something is wrong");
-						System.out.println("current: " + current.getX() + ", " + current.getY());
-						System.out.println("neighbor: " + neighbor.getX() + ", " + neighbor.getY());
+						System.err.println("something is wrong");
+						System.err.println("current: " + current.getX() + ", " + current.getY());
+						System.err.println("neighbor: " + neighbor.getX() + ", " + neighbor.getY());
 					}
 					neighbor.setParent(current);
 					if (!openList.contains(neighbor)) {
@@ -67,10 +67,14 @@ public class AStar {
 		return start;
 	}
 
-	private Tile reconstructPath(Tile current) {
+	public Tile reconstructPath(Tile current) {
 		while (current.getParent() != getStart() || current.getParent().getCoord() == current.getCoord()) {
 			current = current.getParent();
 		}
 		return current;
+	}
+
+	public void setStart(Tile start) {
+		this.start = start;
 	}
 }

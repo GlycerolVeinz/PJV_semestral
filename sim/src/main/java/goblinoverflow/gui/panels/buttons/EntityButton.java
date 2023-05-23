@@ -1,5 +1,6 @@
 package goblinoverflow.gui.panels.buttons;
 
+import goblinoverflow.entities.creatures.CreatureType;
 import goblinoverflow.gui.panels.BottomButtonPanel;
 import goblinoverflow.gui.panels.EntitySpawnButtonListener;
 import goblinoverflow.gui.panels.GamePanel;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EntityButton extends JButton{
+	private CreatureType creatureType;
 
 	public void setListener(EntitySpawnMouseListener listener) {
 		this.listener = listener;
@@ -26,6 +28,7 @@ public class EntityButton extends JButton{
 		this.setBackground(Color.GRAY);
 		this.setForeground(Color.WHITE);
 		this.addActionListener(new EntitySpawnButtonListener(panel, gamePanel));
+		
 	}
 
 	public void setPressed(boolean pressed) {
@@ -42,5 +45,13 @@ public class EntityButton extends JButton{
 
 	public boolean isPressed() {
 		return isPressed;
+	}
+
+	public CreatureType getCreatureType() {
+		return creatureType;
+	}
+
+	public void setCreatureType(CreatureType creatureType) {
+		this.creatureType = creatureType;
 	}
 }
