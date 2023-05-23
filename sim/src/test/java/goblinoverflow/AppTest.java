@@ -30,7 +30,7 @@ public class AppTest
         boolean existingTileLoad = false;
         try {
             Tile tile = new Tile("wall", 0, 0);
-        } catch (IOException e) {
+        } catch (Exception e) {
             existingTileLoad = true;
         }
         assertFalse(existingTileLoad);
